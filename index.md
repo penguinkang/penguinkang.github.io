@@ -1,7 +1,7 @@
 Byungkyu (Jay) Kang
 ---
 
-<div align="center">
+<div align="left">
   <img width="300" src="asset/tweetprobe_raindrop.png">
 </div>
 
