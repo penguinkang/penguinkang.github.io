@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Byungkyu (Jay) Kang</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-title" href="index.html">Byungkyu (Jay) Kang</a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a class="active" href="projects.html">Projects</a>
+      <a href="publications.html">Publications &amp; Patents</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Projects</h1>
+    <p class="lede">
+      Production systems and applied-research projects from my time at Intuit, roughly newest
+      first. Numbers are from internal evaluations and shipped production metrics.
+    </p>
+  </section>
+
+  <section class="block">
+    <h2>Intuit AI (2018 – present)</h2>
+
+    <div class="card">
+      <h3>Intuit Assist — GenAI assistant for support experts</h3>
+      <div class="meta">Conversational AI · production, current</div>
+      <span class="tag">LLM agents</span><span class="tag">RAG</span><span class="tag">RecSys</span>
+      <p>Led the company's GenAI conversational assistant for customer-support experts and a
+      real-time recommendation model that routes customers to the right support channel. Earlier
+      in the same product line, built an automatic call/case-note summarizer that cut post-call
+      agent documentation work.</p>
+    </div>
+
+    <div class="card">
+      <h3>Speech-intent classification: replacing a frontier multimodal LLM</h3>
+      <div class="meta">Applied research · efficient ML</div>
+      <span class="tag">Model compression</span><span class="tag">Multimodal</span><span class="tag">Architecture search</span>
+      <p>Led a systematic architecture-search and fine-tuning study for real-time speech-intent
+      classification. Fusing lightweight, frozen audio and text encoders through a compact
+      classifier — instead of routing through a costly frontier multimodal LLM — hits the
+      production accuracy target (macro F1 0.746) at roughly 1,000x fewer parameters and a
+      fraction of the latency. Technical report in preparation for external submission; see
+      <a href="publications.html">Publications</a>.</p>
+    </div>
+
+    <div class="card">
+      <h3>Fine-tuned production models replacing frontier-LLM calls</h3>
+      <div class="meta">Applied research · production</div>
+      <span class="tag">SLM fine-tuning</span><span class="tag">Model merging</span><span class="tag">Constrained decoding</span>
+      <p>Delivered fine-tuned production models including a small language model that replaces a
+      frontier-LLM call in a real-time memory/context-extraction service (~8x lower latency, 97%+
+      reliability), and a conversational-coaching model for live sales/support agents. Also built
+      a lightweight model-confidence scorer (0.80 Pearson / 0.88 AUROC vs. an LLM-judge) used to
+      gate output quality without an LLM call on every request.</p>
+    </div>
+
+    <div class="card">
+      <h3>Production ML infrastructure &amp; tooling</h3>
+      <div class="meta">Platform</div>
+      <span class="tag">AWS SageMaker</span><span class="tag">Kubernetes</span><span class="tag">RL/eval orchestration</span>
+      <p>Own production ML infrastructure across cloud ML platforms — training recipes and
+      distributed RL/eval orchestration. Built a paved-path fine-tuning/RL library (auto-sft) with
+      an automated-research-agent feature for unattended architecture/hyperparameter search, and
+      fixed a GPU/storage bottleneck that had been blocking 20+ eval configurations.</p>
+    </div>
+
+    <div class="card">
+      <h3>Knowledge-base recommendation &amp; RAG agent platform</h3>
+      <div class="meta">Production · 5 quarters</div>
+      <span class="tag">RAG</span><span class="tag">RecSys</span><span class="tag">Search</span>
+      <p>Shipped a production knowledge-base recommendation feature (5 quarters of iteration) with
+      measurable handle-time and satisfaction impact, and led development of a proprietary
+      RAG-based GenAI agent platform. Earlier, as a founding member of Intuit's first
+      data-science team, built call-routing classification and a domain-specific embedding model
+      that lifted query coverage from 87% to 94%.</p>
+    </div>
+  </section>
+
+  <section class="block" id="legacy">
+    <h2>Earlier work</h2>
+    <p class="section-sub">Nokia, IBM T.J. Watson, and Ph.D. research at UC Santa Barbara</p>
+
+    <div class="card">
+      <h3>Analytics &amp; recommendation — Nokia Technologies</h3>
+      <div class="meta">Sunnyvale, CA · 2016–2018</div>
+      <p>Built large-scale analytics for device/content signals using Spark/Scala, and ML models
+      for recommendation and search ranking.</p>
+    </div>
+
+    <div class="card">
+      <h3>Graph mining &amp; visual analytics — IBM T.J. Watson Research</h3>
+      <div class="meta">Yorktown Heights, NY · 2016 (Visiting Scholar)</div>
+      <p>Graph-mining and reasoning prototypes; interactive visual analytics for surfacing model
+      insights.</p>
+    </div>
+
+    <details class="legacy">
+      <summary>Ph.D.-era research &amp; media-art projects (UC Santa Barbara, 2011–2016)</summary>
+
+      <div class="card">
+        <h3>TweetProbe: real-time microblog stream visualization</h3>
+        <div class="meta">With George Legrady and Tobias Höllerer · IEEE VIS 2013 Art Show</div>
+        <p>A real-time data-visualization framework for Twitter streams — trending tweets,
+        hashtags, and message sentiment — designed both as an analyst's tool and as a wall-sized
+        interactive media-art installation.</p>
+        <img src="asset/tweetprobe_raindrop.png" alt="TweetProbe raindrop visualization" style="max-width:100%;border-radius:8px;margin-top:8px;">
+      </div>
+
+      <div class="card">
+        <h3>Modeling trust &amp; credibility in microblogs</h3>
+        <div class="meta">Best Paper, ASE/IEEE SocialCom 2013</div>
+        <p>Credibility models to automate the evaluation of information reliability across social
+        networks, the open web, and semantic-web sources, accounting for how a reader's context
+        and trust in a source shape perceived credibility.</p>
+      </div>
+
+      <div class="card">
+        <h3>Real-time hand-pose recognition &amp; marker-based AR interfaces</h3>
+        <div class="meta">KIST, Seoul · Mixed &amp; Augmented Reality</div>
+        <p>Real-time articulated hand-pose estimation from a single depth camera for mixed-reality
+        interfaces, and a set of adaptive interaction techniques (nested markers, light-aware
+        rendering, sound- and motion-based interaction) for marker-based augmented reality.</p>
+      </div>
+
+      <div class="card">
+        <h3>Interactive data visualization &amp; media art</h3>
+        <div class="meta">WiGis, Seattle Public Library dataviz, "Data Curation" exhibition (Seoul)</div>
+        <p>Interactive visualization frameworks (WiGis) and data-driven media-art pieces exploring
+        how visual representation shapes the way people consume information.</p>
+      </div>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Byungkyu (Jay) Kang · San Diego, CA · <a href="mailto:penguinkang@gmail.com">penguinkang@gmail.com</a>
+  </div>
+</footer>
+
+</body>
+</html>

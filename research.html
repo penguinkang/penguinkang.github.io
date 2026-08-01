@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research — Byungkyu (Jay) Kang</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-title" href="index.html">Byungkyu (Jay) Kang</a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a class="active" href="research.html">Research</a>
+      <a href="projects.html">Projects</a>
+      <a href="publications.html">Publications &amp; Patents</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Research</h1>
+    <p class="lede">
+      My research has one throughline across a career move from academic HCI to industrial ML:
+      making complex, high-capacity systems (deep networks, then LLMs) smaller, faster and more
+      trustworthy without giving up the capability that makes them useful in the first place.
+    </p>
+  </section>
+
+  <section class="block">
+    <h2>Current: efficient &amp; reliable LLM/ML systems</h2>
+    <p class="section-sub">2018 – present, Intuit AI</p>
+
+    <div class="timeline-item">
+      <h3>When does bypassing the language model help?</h3>
+      <div class="meta">Multimodal speech-intent classification</div>
+      <p>A systematic architecture-search and fine-tuning study on real-time multimodal speech-intent
+      classification. The finding: fusing lightweight, frozen audio and text encoders through a
+      compact classifier reaches the production accuracy target (macro F1 = 0.746 ± 0.002) at
+      roughly 1,000x fewer parameters than a frontier multimodal LLM pipeline, and a fraction of
+      the latency — a counterintuitive result on when generative language-model layers help vs.
+      hurt discriminative tasks. Write-up in preparation for external submission.</p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Fine-tuned small models as frontier-LLM replacements</h3>
+      <div class="meta">Memory/context extraction, conversational coaching, model confidence scoring</div>
+      <p>Applied studies on replacing costly frontier-LLM calls with fine-tuned small language
+      models in latency-sensitive production settings — using weight-space model merging and
+      constrained decoding to recover reliability lost in the switch. One deployed example cut
+      p95 serving latency roughly 8x while lifting structured-output reliability to 97%+. A related
+      thread: building lightweight confidence/quality scorers that agree with an LLM-judge closely
+      enough (0.80 Pearson / 0.88 AUROC) to gate production traffic without calling the judge model
+      on every request.</p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Retrieval, recommendation &amp; conversational agents</h3>
+      <div class="meta">RAG systems, knowledge-base recommendation, GenAI assistants</div>
+      <p>Design and delivery of retrieval-augmented conversational agents and recommendation
+      systems for customer support at scale — from an early domain-specific embedding/search model
+      (built as a founding member of Intuit's first data-science team) to a proprietary RAG-based
+      GenAI agent platform and the recommendation model behind Intuit's current GenAI assistant
+      for support experts.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Earlier: information reliability &amp; visual analytics</h2>
+    <p class="section-sub">Ph.D. research, UC Santa Barbara (2011–2016), plus research stints at Yahoo Labs, Adobe Research, IBM T.J. Watson, and Nokia</p>
+    <p>
+      My Ph.D. work asked a version of the same question I still ask today, just about people
+      instead of models: how do you help someone tell reliable information from unreliable
+      information in a noisy, high-volume stream (social media, in that case), and how do you
+      design an interface that makes that judgment easier rather than harder? That work spanned:
+    </p>
+    <ul class="plain">
+      <li><strong>Information credibility on social media</strong> — models and interfaces for
+      assessing the reliability of claims and sources on Twitter and similar platforms, including
+      a best-paper-awarded study on credibility perception.</li>
+      <li><strong>Interactive visual analytics</strong> — real-time visualization frameworks for
+      microblog streams (<em>TweetProbe</em>, exhibited at the IEEE VIS Arts Program) and
+      library/usage data, designed to surface patterns a static report would hide.</li>
+      <li><strong>Multimodal &amp; mixed-reality interaction</strong> — hand-pose estimation from
+      depth sensors and adaptive marker-based augmented-reality interfaces, done during a research
+      stint at KIST (Seoul).</li>
+    </ul>
+    <p>See <a href="projects.html#legacy">Projects → earlier work</a> for specifics, and the
+    <a href="publications.html">Publications</a> page for the papers.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Byungkyu (Jay) Kang · San Diego, CA · <a href="mailto:penguinkang@gmail.com">penguinkang@gmail.com</a>
+  </div>
+</footer>
+
+</body>
+</html>
