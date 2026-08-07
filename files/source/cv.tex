@@ -1,0 +1,760 @@
+\documentclass[10pt]{article}
+
+% Times/Nimbus Roman + matching math symbols -- the classic ACL/ACM-style
+% body font. Narrower than the default Computer Modern, so more content
+% fits per page without shrinking the font size.
+\usepackage{mathptmx}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+\usepackage{comment}
+\usepackage{hyperref}
+% Simpler bibsection for CV sections
+% (thanks to natbib for inspiration)
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em} %1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newenvironment{bibsection}%
+        {\begin{enumerate}{}{%
+%        {\begin{list}{}{%
+       \setlength{\leftmargin}{\bibhang}%
+       \setlength{\itemindent}{-\leftmargin}%
+       \setlength{\itemsep}{\bibsep}%
+       \setlength{\parsep}{\z@}%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{enumerate}\vspace{-.6\baselineskip}}
+%        {\end{list}\vspace{-.6\baselineskip}}
+\makeatother
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[\includegraphics[height=1.5in]{my_picutre}]{Your Name}
+%
+% the picture will be flush right across from the name.
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+% The section headings
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \hyphenpenalty=10000%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+% An itemize-style list with lots of space between items
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=*]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+        {\begin{list}{#1}{%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+
+% An itemize-style list with little space between items
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
+        {\end{itemize}}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{loneinnerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
+        {\end{itemize}\vspace{-.6\baselineskip}}
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+% Uses hyperref to link DOI
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+% For \url{SOME_URL}, links SOME_URL to the url SOME_URL
+\providecommand*\url[1]{\href{#1}{#1}}
+% Same as above, but pretty-prints SOME_URL in teletype fixed-width font
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+\providecommand*\phone[1]{#1}
+% Same as above, but pretty-prints ADDRESS in teletype fixed-width font
+%\renewcommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
+
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    \TeX}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makeheading{Byungkyu Kang}
+
+\section{Contact Information}
+
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{1.4in}%
+%
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+%\href{http://www.cse.osu.edu/}%
+%     {Department of Computer Science and Engineering} & \\
+%\href{http://www.osu.edu/}{The Ohio State University}
+Byungkyu Kang, Ph.D., Senior Staff AI Scientist  & \\
+Intuit AI & \phone{+1-805-455-9856}\\
+\url{https://penguinkang.github.io/} & \email{penguinkang@gmail.com}
+\end{tabular}
+
+%\section{Objective}
+
+%Insert text here if you want to
+%\begin{innerlist}
+%\item More information and auxiliary documents can be found at\\\url{http://www.tedpavlic.com/facjobsearch/}
+%\end{innerlist}
+
+\section{Research Interests}
+
+My research asks when large neural models are the right tool and when smaller, purpose-built ones are -- spanning language-model fine-tuning and alignment, multimodal (speech + text) understanding, retrieval-augmented generation, and the evaluation methodology needed to trust these systems in production. This continues a longer-standing interest from my Ph.D. work in \href{http://iui.acm.org/2016/committee.html}{Intelligent User Interfaces} (HCI + AI) and \href{http://www.darpa.mil/program/explainable-artificial-intelligence}{Explainable Artificial Intelligence (XAI)}: how people come to understand, calibrate trust in, and productively collaborate with automated systems, whether that system is a credibility model for social-media content or a fine-tuned speech classifier serving live customer-support calls. Other areas: Natural Language Processing, Network Science, Recommender Systems, Social Computing. (\textbf{\href{https://scholar.google.com/citations?user=_PXCZLkAAAAJ&hl=en&oi=ao}{Google Scholar Page}})
+
+\section{Education}
+
+\href{http://www.ucsb.edu/}{\textbf{University of California, Santa Barbara}},
+California, USA
+\begin{outerlist}
+
+\item[] Ph.D.,
+        \href{http://www.cs.ucsb.edu/}
+             {Computer Science},
+             %\emph{Expected:} 
+             March 2016
+        \begin{innerlist}
+        \item Thesis Title: \emph{Information Reliability on the Social Web---Models and Applications in Intelligent User Interfaces}
+          
+        \item Committee:
+        \href{http://www.cs.ucsb.edu/~holl/}
+                   {Tobias H\"ollerer} (Advisor),\\
+        \href{http://www.cs.ucsb.edu/~mturk}
+                   {Matthew Turk} (UCSB)
+                   ,\\
+        \href{http://www.cs.ucsb.edu/~xyan/}
+                   {Xifeng Yan} (UCSB)
+                and
+        \href{http://www.cs.ucsb.edu/~jod/}
+                   {John O'Donovan} (UCSB)
+        \end{innerlist}
+
+\item[] M.S.,
+        \href{http://www.cs.ucsb.edu/}
+             {Computer Science},
+             June 2012
+        \begin{innerlist}
+        \item Thesis Title: \emph{An Analysis of Credibility in Microblogs}
+        \item Advisor:
+              \href{http://www.cs.ucsb.edu/~holl/}
+                   {Tobias H\"ollerer}
+        \end{innerlist}
+\end{outerlist}
+\vspace{.1in}
+\href{http://http://neweng.cau.ac.kr/}{\textbf{Chung-ang University}},
+Seoul, Korea
+\begin{outerlist}
+\item[] Bachelor of Engineering, 
+        \href{http://e3home.cau.ac.kr/20141201/eng/main/main.php}
+             {Electrical Electronics Engineering}, February 2007
+        % \begin{innerlist}
+        % \item \emph{Undergraduate Award for Outstanding Academic Achievement.}
+        % \end{innerlist}
+
+\end{outerlist}
+
+\section{Professional Experience}
+
+\textbf{Intuit - Intuit AI} \hfill{Applied AI Research -- Speech, Memory \& Agentic Systems}\\7535 Torrey Santa Fe Rd, San Diego, CA, 92129 \hfill {Jun 2025 - Present}
+\begin{innerlist}
+\item[] \emph{Senior Staff AI Scientist}
+   \item[--] Led a systematic architecture-search and fine-tuning study on real-time multimodal speech-intent classification, showing that replacing a costly frontier multimodal language model with lightweight frozen audio+text encoders fused through a compact (4.5M-parameter) classifier reaches the production accuracy target (macro $F_1=0.746\pm0.002$) at roughly 1,000x fewer parameters and a fraction of the latency -- a counterintuitive finding on when generative language-model layers help vs.\ hurt discriminative tasks (see Publications).
+   \item[--] Built a fine-tuned model self-assessment/confidence scorer (linear probe on a 3B model) reaching 0.801$\pm$0.031 Pearson and 0.884$\pm$0.024 AUROC correlation with LLM-judge quality (vs.\ 0.377 for a naive log-prob baseline), enabling automated production quality-gating.
+   \item[--] Led a study replacing a costly frontier-LLM call in a real-time conversational memory/context-extraction service with a fine-tuned small language model (Qwen3-4B): the deployed configuration (weight-space model merging + constrained decoding) cut p95 serving latency roughly 8x while lifting structured-output reliability to 97.3\%.
+   \item[--] Led fine-tuning of a compact conversational-coaching model (Llama-3.2-3B) generating real-time coaching guidance for sales and customer-support agents during live conversations; deployed for end-to-end validation.
+   \item[--] Built production-scale ML research infrastructure -- container recipe management, distributed RL/evaluation orchestration across SageMaker, HyperPod and Kubernetes -- including a paved-path fine-tuning/RL library (auto-sft) with an automated-research-agent feature; diagnosed and fixed a GPU/storage bottleneck that had stalled a 20+ configuration evaluation pipeline for days.
+   \item[--] Architected the data half of the company's self-improving-model research program: an experience-store service, attribution converter, self-questioning task-synthesis pipeline, and a memory/topic-extraction small-model suite for enterprise conversational memory.
+   \item[--] Filed invention disclosures for multimodal workflow discovery and labeling, automated distillation of executable agent skills, a guidance-deduplication service, and the multimodal speech-intent architecture above.
+   \\
+\end{innerlist}
+
+\textbf{Intuit - Intuit AI} \hfill{Applied AI Research -- Customer Support \& Generative AI}\\7535 Torrey Santa Fe Rd, San Diego, CA, 92129 \hfill {Jun 2021 - Jun 2025}
+\begin{innerlist}
+\item[] \emph{Staff AI Scientist}
+   \item[--] Led modeling work as the team evolved from classical NLP to generative AI: call-routing/keyword classification, then a 5-quarter production real-time knowledge-base recommendation feature with measurable handle-time and satisfaction impact, then an automatic call/case-note summarization model, then \textbf{Intuit Assist} -- a retrieval-grounded generative-AI conversational assistant for product and tax experts -- as part of a broader proprietary RAG-based GenAI agent platform (PSA \& HelpGPT).
+   \item[--] Designed and led a real-time recommendation model routing customers to the right support channel/expert, a flagship company-wide initiative; also led the design of a real-time speech-to-intent model for contact-center agent assistance and its responsible-AI dataset-approval process for fine-tuning.
+   \item[--] Co-authored two internal research papers on guardrail-based large-language-model conversational advice systems; owned production on-call and root-cause analysis for the generative-AI assistant service.
+   \item[--] Filed invention disclosures for a knowledge-base recommendation method, a dynamic keyword tagger, personalized content sampling, a conversational contextualizer, and hallucination detection based on entity patterns.
+   \\
+\end{innerlist}
+
+\textbf{Intuit - Intuit AI} \hfill{Data Science Lab, Consumer Group}\\7535 Torrey Santa Fe Rd, San Diego, CA, 92129 \hfill {Mar 2018 - Jun 2021}
+\begin{innerlist}
+\item[] \emph{Senior AI Scientist}
+   \item[--] Founding member of the company's first dedicated data-science team; built a question-answering model line (four iterations) using part-of-speech tagging and entity extraction for query understanding, and cart-abandonment prediction models used across multiple product lines.
+   \item[--] Retrained the company's domain-specific text-embedding model, improving query token coverage from 87\% (word2vec baseline) to over 94\%; root-caused a $\sim$4.5\% zero-result response rate via post-deployment health-check analysis.
+   \item[--] Built a call-routing (``call driver'') classification system replacing manual/external tooling; took 4 models through full production certification (build, deployment, monitoring, and release pipelines).
+   \item[--] Developed ML models in production (batch and online) applied to over 50M customers; filed invention disclosures for a cart-abandonment model and a self-serve task-automation model.
+   \\
+\end{innerlist}
+
+\textbf{Nokia Technologies} \hfill{Analytics, Chief Technology Office (CTO)}\\200 S Mathilda Ave, Sunnyvale, CA, 94086 \hfill {Sep 2016 - March 2018}
+\begin{innerlist}
+\item[] \emph{Data Scientist}
+   \item[--] Conduct research on big data analytics through statistical modeling, machine learning and visualization.
+   \item[--] Extract knowledge from both structured and unstructured data using data mining, and develop AI-based search and recommender systems.
+   \\
+\end{innerlist}
+
+\textbf{IBM Thomas J. Watson Research Center} \hfill {Network Science and Machine Reasoning Solutions}\\1101 Kitchawan Rd, Yorktown Heights, NY 10598 \hfill {Jun 2016 - Sep 2016}
+\begin{innerlist}
+\item[] \emph{Visiting Scholar}
+   \item[--] Conducted research on graph mining and machine learning/reasoning.
+   \item[--] Conduct research on data visualization and intelligent user interfaces.\\
+   Mentor: Sabrina Lin\\
+\end{innerlist}
+%
+\textbf{UCSB} \hfill{Imaging, Interaction, and Innovative Interfaces (FourEyes) Lab}\\
+University of California, Santa Barbara, CA 93106 \hfill {Jan 2011 - May 2016}
+\begin{innerlist}
+\item[] \emph{Research Assistant / Postdoctoral Researcher}
+   \item[--] Modeling and predicting information quality on the Social Web (credibility, expertise, influence, etc)
+   \item[--] Interactive interface design for complex network analysis
+   \item[--] Interactive data visualization and visual analytics
+   \item[--] Ambient data visualization (collaboration with UCSB Media Arts and Technologies)
+   \item[--] Real-time hand pose recognition (computer vision)\\
+\end{innerlist}
+%
+\textbf{Adobe Research} \hfill{Systems Technology Lab}\\
+321 Park Ave, San Jose, CA 95113\hfill {Jun 2014 - Sep 2014}
+\begin{innerlist}
+\item[] \emph{Data Scientist Intern, Data Science and Visualization Research}
+   \item[--] Designed an audience manager for social marketers that detects influential users from social media and provides a content-based landscape of the influential users through real-time web-based visualization interface.\\ 
+   Mentor: Nedim Lipka\\
+\end{innerlist}
+%
+\textbf{Yahoo!}\hfill{Yahoo Labs}\\Diagonal 177, 08018 Barcelona, Catalunya, Spain \hfill {Jun 2013 - Sep 2013}
+\begin{innerlist}
+    \item[] \emph{Research Intern}
+    \item[--] \emph{Entity-Driven Exploratory and Serendipitous Search System}~~
+    Constructed bundling algorithm and designed user interface and novel data visualization for entity-driven exploratory search. This project is under the EU project `Linguistically Motivated Semantic Aggregation Engines (LiMoSINe)'. \\Mentor: Mounia Lalmas\\
+\end{innerlist}
+%
+\textbf{Korea Institute of Science and Technology} \hfill{Imaging Media Research Center}\\
+San 5-63, Hawolgok-dong, Seongbuk-gu, Seoul, South Korea \hfill {Jun 2012 - Aug 2012}
+\begin{innerlist}
+\item[] \emph{Research Intern}
+\item[--] \emph{Real-Time Hand Pose Recognition from a Single Depth Image}~~
+    Conducted research on hand pose recognition using depth image based on object recognition approach using machine learning algorithms such as random forest decision tree and boosting algorithms. \\Mentor: Hwasup Lim\\
+\end{innerlist}
+%
+\textbf{IBM} \hfill{Global Technology Service}\\10 Gukjegeumyung-ro, Yeoeuido-dong, Yeongdeungpo, Seoul, Korea \hfill {Oct 2008 - Jun 2009}
+\begin{innerlist}
+\item[] \emph{System Engineer}
+   \item[--] Designed and implemented data centers and supported high availability for national financial companies (e.g. Korea Exchange and major banks).\\
+\end{innerlist}
+%
+\textbf{SAMSUNG}\hfill{Information Technology R\&D Center, Samsung SDS}\\7-29 Sincheon-dong, Songpa-gu, Seoul, South Korea
+ \hfill {Jan 2007 - Oct 2008}
+\begin{innerlist}
+\item[] \emph{Research Associate}
+   \item[--] \emph{Wireless Sensor Network (WSN)}~~
+    Conducted a national pilot research project (with Korea Expressway Corp)
+    \item[--] \emph{UI Design for Mobile Platforms}~~
+    Participated in a formative research project for novel smartphone user interface and operating system.
+    \item[--] Participated in multiple pilot projects that design/implement RFID/WSN-based intelligent systems.\\
+\end{innerlist}
+
+
+
+\section{Publications}
+\vspace{-.2in}
+\subsubsection*{Patents and Patents Applications}
+\begin{bibsection}
+    \item[--] US Patent 11,907,657, “DYNAMICALLY EXTRACTING N-GRAMS FOR AUTOMATED VOCABULARY UPDATES.” Filed Jun 30, 2023; Granted Feb 20, 2024. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent 11,941,144, “METHODS AND SYSTEMS FOR AUTOMATIC CALL DATA GENERATION,” Jul 30, 2024. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent 12,067,976, “AUTOMATED SEARCH AND PRESENTATION COMPUTING SYSTEM.” Filed Sep 29, 2021; Granted Aug 20, 2024. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent Application, “METHOD AND SYSTEM FOR CONTEXT-SPECIFIC GENERATIVE MODEL ANSWERS FROM CONTEXT-SPECIFIC QUERIES.” Filed Dec 29, 2023. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent [number to verify -- JK], “METHOD AND SYSTEM OF AUTOMATICALLY PREDICTING ANOMALIES IN ONLINE FORMS.” Filed Apr 30, 2021; Granted Jun 18, 2024. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent Application, “METHOD AND SYSTEM TO DETECT ABANDONMENT BEHAVIOR,” Aug 28, 2020. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent Application, “LEVERAGING GENERATIVE ARTIFICIAL INTELLIGENCE TO GENERATE STRATEGY INSIGHTS,” Oct 31, 2023. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent Application, “QUERY AUGMENTATION,” Jun 21, 2024. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent Application, “RESPONSE SYNTHESIS,” Jun 21, 2024. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent [number to verify -- JK], “FRAMEWORK-AGNOSTIC SUMMARIZATION OF MULTI-CHANNEL COMMUNICATION.” Filed Sep 30, 2022; two granted-record dates on file (Oct 8, 2024 and May 21, 2024) with mutually inconsistent short-form numbers (1,783,107 / 1,989,500) -- needs verification against the real grant number(s); may be one patent or two related ones. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent [number to verify -- JK], “CALIBRATED RISK SCORING AND SAMPLING.” Filed Jul 30, 2021; Granted Jun 18, 2024 (recorded number 1,201,429 looks like a truncated/incorrect short-form -- needs verification). Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent Application, “VARIABLE PROCESSING WITH MACHINE LEARNING USAGE PREDICTION,” Apr 11, 2024. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+    \item[--] US Patent Application 19/760,993 (IPR-2614542US), “GUIDANCE DEDUPLICATION SERVICE FOR REAL-TIME INTERACTIONS.” Filed Jul 31, 2026. Inventor: Byungkyu KANG. Assignee: Intuit Inc.
+
+
+   % \item[--] US Patent Application 2112166US (37202-888001), “AUTOMATED SEARCH AND PRESENTATION COMPUTING SYSTEM,” Sep 29, 2021. Inventors: Byungkyu KANG, Alex ZHICHAREVICH, Kate SWIFT-SPONG, Zhewen FAN, Elik SROR
+   
+   % \item[--] US Patent Application 2112115US (327696-000573), “METHODS AND SYSTEMS FOR AUTOMATIC CALL DATA GENERATION,” Jul 30, 2021. Inventors: Byungkyu KANG, Wanyu ZHANG, Wenxin XIAO, Oliveira, CARLOS
+
+   % \item[--] US Patent Application 2111971US (327696-000500), “METHOD AND SYSTEM OF AUTOMATICALLY PREDICTING ANOMALIES IN ONLINE FORMS,” Apr 30, 2021. Inventors: Janani KALIANAM, Zhewen FAN, Byungkyu KANG, Kate SWIFT-SPONG, Shivakumara NARAYANASWAMY, Farzaneh KHOSHNEVISAN
+   
+   % \item[--] US Patent Application 2112111US (37202/883001), “CALIBRATED RISK SCORING AND SAMPLING,” Jul 30, 2021. Inventors: Byungkyu KANG, Kate SWIFT-SPONG, Shivakumara NARAYANASWAMY, Carlos OLIVEIRA, Farzaneh KHOSHNEVISAN, Zhewen FAN, Runhua ZHAO, Wan Yu ZHANG
+   
+   % \item[--] US Patent Application 2011773US (327696-000448), “METHOD AND SYSTEM TO DETECT ABANDONMENT BEHAVIOR,” Aug 28 2020. Inventors: Byungkyu KANG, Shivakumara NARAYANASWAMY, Vitor CARVALHO, Disha SINGLA, Sam MAYASSI
+\end{bibsection} 
+
+
+\subsubsection*{Manuscripts in Preparation}
+\begin{bibsection}
+   \item[--] {\bf Byungkyu Kang}, ``From Multimodal LLMs to Lightweight Classifiers: When Bypassing the Language Model Improves Speech Intent Detection.'' Technical report, Intuit AI, 2026 (in preparation for external submission).
+\end{bibsection}
+
+\subsubsection*{Papers Under Review}
+\begin{bibsection}
+
+   \item[--] {\bf Byungkyu Kang}, Tobias H{\"o}llerer and John O'Donovan, ``Evaluating personal metadata and credibility perception in social media streams,'' ACM Transactions on Interactive Intelligent Systems (TiiS)
+   
+   \item[--] Ilaria Bordino, Olivier Van Laere, Yelena Mejova, {\bf Byungkyu Kang} and Mounia Lalmas, ``Beyond Entities: Promoting Exploratory Search with Bundles,'' Information Retrieval, Kluwer Academic Publishers
+\end{bibsection}  
+
+
+\subsubsection*{Peer Reviewed Papers}
+\begin{bibsection}
+   \item[--] Nafis Sadeq \emph{et al.} (incl.\ {\bf Byungkyu Kang}), \href{https://aclanthology.org/2024.findings-emnlp.846/}{``Mitigating Hallucination in Fictional Character Role-Play,''} Findings of \emph{EMNLP}, 2024.
+
+   \item[--] Nafis Sadeq \emph{et al.} (incl.\ {\bf Byungkyu Kang}), \href{https://aclanthology.org/2023.eacl-main.215/}{``Unsupervised Improvement of Factual Knowledge in Language Models,''} \emph{EACL}, 2023.
+
+   \item[--] {\bf Byungkyu Kang}, Haleigh Wright, Tobias H\"ollerer, Ambuj Singh and John O'Donovan, ``Through The Grapevine: A Comparison of News in Microblogs and Traditional Media,'' Lecture Notes in Social Networks, Berlin, Springer-Verlag, 2017
+   
+   \item[--] {\bf Byungkyu Kang}, Nava Tintarev, Tobias H{\"o}llerer and John O'Donovan, ``What am I not seeing? An Interactive Approach to Social Content Discovery in Microblogs,'' 8th International Conference on Social Informatics (SocInfo 2016), Springer, 279-294p
+   
+   \item[--] {\bf Byungkyu Kang}, Shinsuke Nakajima, Tobias H{\"o}llerer and John O'Donovan, ``A Cross-Cultural Analysis of Explanations for Product Reviews,'' ACM Conference on Recommender Systems (RecSys'16)
+   
+   \item[--] Yuuki Matsunami, Mayumi Ueda, Shinsuke Nakajima,Takeru Hashikami, Sunao Iwasaki, John O’Donovan, and {\bf Byungkyu Kang}, ``A Method for Automatic Scoring of Various Aspects of Cosmetic Item Review Texts based on Evaluation Expression Dictionary,'' The 24th International MultiConference of Engineers and Computer Scientists (IMECS 2016), Hong Kong, 16-18 March, 2016 (in Press)
+   
+   \item[--] Nava Tintarev, {\bf Byungkyu Kang}, Tobias H{\"o}llerer and John O'Donovan. ``Inspection Mechanisms for Community-based Content Discovery in Microblogs,'' Joint Workshop on Interfaces and Human Decision Making in Recommender Systems (intRS) held in conjunction with the 9th ACM Conference on Recommender Systems, Vienna, Austria, September 2015.
+   
+   \item[--] {\bf Byungkyu Kang}, Tobias H{\"o}llerer and John O'Donovan. ``The Full Story: Automatic detection of unique news content in Microblogs'', Proceedings of the 2015 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining (ASONAM). Paris, France, August 2015.
+   
+   \item[--] {\bf Byungkyu Kang}, Tobias H{\"o}llerer and John O'Donovan. ``Believe it or Not? Analyzing Information Credibility in Microblogs'', Proceedings of the 2015 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining (ASONAM). Paris, France, August 2015.
+   
+   \item[--] Sujoy Sikdar, Sibel Adal\i, Md Tanvir Amin, Tarek Abdelzaher, Kevin Chan, Jin-Hee Cho, {\bf Byungkyu Kang}, John O'Donovan. ``Finding True and Credible Information on Twitter'', 17th International Conference of Information Fusion (IEEE FUSION), Salamanca, Spain, July 2014.
+   
+   \item[--] John O'Donovan, {\bf Byungkyu Kang}. ``Competence Modeling in Twitter: Mapping Theory to Practice'', International Conference on Social Computing (SocialCom 2014). Palo Alto, California., USA. May 27th-29th 2014
+   
+   \item[--] {\bf Byungkyu Kang}, George Legrady and Tobias H{\"o}llerer. TweetProbe: A Real-Time Microblog Stream Visualization Framework. IEEE VIS, Arts Program (VISAP), Atlanta, Georgia, October 2013.
+   
+   \item[--] Sujoy Sikdar, {\bf Byungkyu Kang}, John O'Donovan, Tobias H{\"o}llerer, Sibel Adal\i, ``Understanding Information Credibility on Twitter'', IEEE/ASE SocialCom, Washington, DC, USA, 2013 {\bf (Best paper)}
+   
+   \item[--] Sujoy Sikdar, {\bf Byungkyu Kang}, John O'Donovan, Tobias H{\"o}llerer, Sibel Adal\i, ``Cutting Through the Noise: Defining Ground Truth in Information Credibility on Twitter'', ASE HUMAN JOURNAL 2.1, 2013
+   
+   \item[--] James Schaffer, {\bf Byungkyu Kang}, Tobias H{\"o}llerer, Hengchang Liu and John O.Donovan,``Interactive Interfaces for Complex Network Analysis: A QoI Perspective'', IEEE International Conference on Pervasive Computing and Communications(PERCOM), 2013
+   
+   \item[--] John O'Donovan, {\bf Byungkyu Kang}, Greg Meyer, Tobias H{\"o}llerer and Sibel Adal\i,``Credibility in Context: An Analysis of Feature Distributions in Twitter'', IEEE SocialCom, Amsterdam, Netherlands, 2012
+   
+   \item[--] {\bf Byungkyu Kang}, John O'Donovan and Tobias H{\"o}llerer, ``Modeling Topic Specific Credibility in Twitter'', International Conference on Intelligent User Interfaces(IUI), Lisbon, Portugal, 2012
+   
+   \item[--] {\bf Byungkyu Kang}, John O'Donovan and Tobias H{\"o}llerer, ``A Framework for Modeling Trust in Collaborative Ontologies'', Proceedings of the sixth Graduate Student Workshop on Computing, 2011, UC Santa Barbara, 39-40.
+   
+   \item[--] {\bf Byungkyu Kang}, Mathieu Rodrigue, Tobias H{\"o}llerer and Hwasup Lim, ``Poster: Real Time Hand Pose Recognition with Depth Sensors for Mixed Reality Interfaces'', IEEE Symposium on 3D User Interfaces(3DUI), 2013.
+\end{bibsection} 
+
+
+\subsubsection*{Exhibitions}
+\begin{bibsection}
+   \item[--] {\bf Byungkyu Kang}. ``TweetProbe''. In A. G. Forbes and L. Thorson, editors. \href{http://visap.uic.edu/2013/VISAP_ArtShow_Catalog_2013.pdf}{The IEEE VIS 2013 Art Show Catalog}, pages 12-13. IEEE, 2013.
+   
+   \item[--] George Legrady, {\bf Byungkyu Kang}. ``Korea - 2012'', Data Curation, Museum of Art, Seoul National University, 23 May - 18 Aug, 2013
+   \item[--] Participation in ``Making Visible the Invisible'', Information visualization using Seattle public library transactions.\\Media Arts and Technology Program, UC Santa Barbara, 2013
+   
+   \item[--] ``\href{http://show.mat.ucsb.edu/}{Media Arts and Technology End of Year Show}'', Research on intelligent interfaces, data visualization, augmented reality and computer vision, UC Santa Barbara, 2011-2015
+   
+%   \item StreamScope: Social Stream Analyzer, \emph{MAT End of the Year Show 2015}.
+   
+%   \item TweetProbe: A Real-Time Microblog Stream Visualization, \emph{MAT End of the Year Show 2015}.
+
+\end{bibsection}
+
+
+
+
+\section{Awards and Fellowships}
+
+\begin{innerlist}
+   \item[--] Best Paper Award, IEEE/ASE International Conference \hfill September, 2013\\
+   on Social Computing (SocialCom 2013) 
+   
+   \item[--] Doctoral Student Travel Grants, Academic Senate, \hfill August, 2015\\
+   The Regents of the University of California (\$1,100)
+   
+   \item[--] Graduate Student Award, National Science Foundation \& \hfill February, 2012\\
+   ACM International Conference on Intelligent User Interfaces (IUI) (\$2,500)
+   
+   
+   \item[--] Award of Excellence, Korea Expressway Corp (1 of 2 grantees) \hfill September, 2007\\
+   (An appreciation award for national pilot research projects)
+   
+   
+   \item[--] Teaching Assistant Fellowship, \hfill March, 2005 - December, 2006\\
+   Ministry of Knowledge and Economy of Korea
+   
+   
+   \item[--] Librarian scholarship, Central Library, Chung-ang University
+   \hfill 2003 - 2006
+\end{innerlist}
+
+% Scholarships
+% \begin{innerlist}
+% \item Conacyt-UC Mexus Doctoral Fellowship\\
+% \emph{Coverage of all tuition fees, medical insurgence, and monthly stipend for 5 years}.
+% \item Google Anita Borg Scholar\\\emph{Awarded \$10,000 dollars.}
+% \end{innerlist}
+
+% \halfblankline
+
+% Leadership
+% \begin{innerlist}
+% \item Organized one of the largest Latina Hackathons in Mexico City. \hfill 2015\\
+% \emph{I obtained over 10,000 dollars in funding for the Hackathon where almost 300 Latinas participated. I also 
+% prepared boot camps that empowered all individuals to code and create smart homes. Organized recruitment campaigns in high schools, universities to reach more women.}
+% \item Technical Lead for Stanford Crowd Research. \hfill 2015\\
+% \emph{We are developing with over 300 researchers across the globe the crowd marketplace of tomorrow.}
+% \item Awarded to join Google's Anita Borg T2 Global Planning Committee \hfill 2014\\
+% \emph{The Google Anita Borg Community aims to target 15,000 women world-wide this year, promoting the number of females in CS.}
+% \item Awarded to join Microsoft's Bizspark Grant Program\hfill 2014\\
+% \emph{Three-year access to Microsoft software development tools, marketing visibility,\\and a connection to the BizSpark ecosystem.} 
+% \item Awarded to be a TrepCamp Scholar \hfill 2014
+% \item Travel Award to attend Grace Hopper Celebration of Women in Computing \hfill 2014
+% \item Industry Liason for UCSB's Graduate Student Workshop\hfill 2013\\\emph{Raised \$8,150 dollars.}
+% \item 2nd place in UCSB's New Venture Competition\hfill 2012
+% \item Vicepresident of UCSB's Women in Computer Science (WICS)\hfill 2010-2011
+% \item Student Travel Award for Grad Cohort Workshop\hfill 2011
+% \item Semi-Finalist in UCSB's New Venture Competition\hfill 2010
+% \item Google Travel Award for Grace Hopper Celebration of Women in Computing \hfill 2009
+% \end{innerlist}
+
+% \halfblankline
+
+% Academic Awards
+% \begin{innerlist}
+% \item Finalist in Mexico's National Dataton\hfill 2014
+% \item Awarded to join the ACM CSCW Reviewer Mentorship Program\hfill 2014
+% \item Best Reviewer Award at UCSB's Graduate Student Workshop\hfill 2013
+% \item First Place in Poster Presentation at UCSB's Graduate Student Workshop\hfill 2012
+% \item Undergraduate Award for Outstanding Academic Achievement\hfill 2009
+% \item 1st place in the Acceleration task in Mexico's National Mini Baja Competition\\ \emph{**Teams of students design and build small off-road cars.}
+% \item 2nd and 3rd place in the Handling (driving) task in Mexico's National Mini Baja Competition.
+% \item 2nd place in the Math Contest Banda Mobilus.
+% \end{innerlist}
+
+
+\section{Teaching and Presentations} 
+%%%% ADD MENTORING and OUTREACH PROGRAMS
+\vspace{-.2in}
+\subsubsection*{Lectures / Teaching Assistants}
+\begin{innerlist}
+   \item[--] Guest Lecturer, Network Science and Data Management (CS290D), \hfill{Feb. 2016.}\\UC Santa Barbara
+   \item[--] Guest Lecturer, Social Data Mining and Interactive Visualization, \hfill{Sep. 2015.}\\ \href{http://networkscience.igert.ucsb.edu/education/summer-boot-camp}{IGERT Summer Boot Camp}, UC Santa Barbara
+   \item[--] Guest Lecturer, Visualizing Information (MAT 259), UCSB \hfill{2014 -- 2015}\\ Covered data mining methods such as web/social media crawling, basic machine learning techniques, database operation, and both client and web-based data visualization techniques. (20 graduate students)
+   \item[--] Teaching Assistant, Creative Problem Solving and \hfill{Mar. 2015--Dec. 2016}\\ Engineering Design, Chung-ang University
+   % mentoring
+    % \item[--] 5 masters student from the departments of Computer Engineering, Media Arts and Technology, Art History, Business and Technological Innovation. These mentorships have resulted in publications, exhibitions, and masters thesis currently in progress.
+    % \item[--] 6 undergraduate students from the departments of Computer Engineering, Electrical Engineering, Computer Science, and Visual Design. The mentorship have resulted in publications, exhibitions, and undergraduate thesis.
+\end{innerlist}
+
+\subsubsection*{Invited Talks}
+\begin{innerlist}
+   \item[--] ``An Advice For Those Who Face A Fork In The Road'' \hfill{Nov. 10. 2018}\\UC San Diego, CA
+   \item[--] ``Information Credibility and Interactive User Interfaces'' \hfill{Oct. 19. 2017}\\Amazon Research, Seattle, WA
+   \item[--] ``Information Credibility and Interactive User Interfaces'' \hfill{Jul. 4. 2016}\\Universidad del Desarrollo, Santiago, Chile
+   \item[--] ``Interactive Spatial Representations for Search and \hfill{Nov. 17. 2015.}\\Recommendation Algorithms'', \href{http://spatial.ucsb.edu/thinkspatial}{ThinkSpatial: The UCSB Brownbag Forum on Spatial Thinking}, UC Santa Barbara
+   \item[--] {Adobe Internal Tech Demo}, Adobe Research, \hfill{Sep, 2014}\\Online webinar session that introduces an emerging or trending technology. ``Mining and analyzing social big data using Apache Spark''
+   \item[--] \href{http://eao.sa.ucsb.edu/}{Early Academic Outreach Program (EAOP)}\hfill{Mar 7, 2014}\\University of California, Invited talk to high school students.
+   \item[--] Demo at the invited talk, ``Making Visible the Invisible'', \hfill{May 7, 2013}\\UC Santa Barbara Library
+\end{innerlist}
+
+
+% \newpage
+\section{Service}
+\vspace{-.2in}
+\subsubsection*{Outreach}
+\begin{innerlist}
+\item[--] Speaker to showcase Four Eyes Laboratory research\hfill 2014\\ to middle and high school students, UC Santa Barbara
+\item[--] Speaker to motivate computer science studies\hfill 2014\\at Middle Schools, Goleta CA
+\item[--] Interviewee to showcase Four Eyes Laboratory research \hfill 2014\\
+Duksung Women's University, Seoul, Korea
+\item[--] Meeting with prospective and admitted UCSB students\hfill 2013-2015
+\end{innerlist}
+
+\subsubsection*{Steering Committee}
+\begin{innerlist}
+\item[--] Web and Design Chair -- \href{http://iui.acm.org/2016/committee.html}{The 21st ACM International Conference on Intelligent User Interfaces (IUI)}, March 7, 2016, Sonoma, California
+\end{innerlist}
+
+% \subsection{University Service}
+% \begin{innerlist}
+% \item Assist with planning of annual Open House of UCSB Four Eyes Laboratory.
+% \end{innerlist}
+
+\subsubsection*{Program Committee$^\dagger$ and Reviewer}
+\begin{innerlist}
+   \item[--] ACM Transactions on Internet Technology (ToiT) (Reviewer), 2018
+   \item[--] ACM Transactions on Interactive Intelligent Systems (TIIS) (Inaugural Board of Distinguished Reviewer), 2017/2018
+   \item[--] The 23rd ACM International Conference on Intelligent User Interfaces (IUI, 2018)
+   \item[--] PLOS ONE Journal Review Board, 2017-2018
+   \item[--] the 7th International Workshop on Modeling Social Media at the 25th International World Wide Web Conference (WWW), 2016
+   \item[--] Social Network Analysis and Mining, Springer-Verlag, 2016
+   \item[--] The 25th International World Wide Web Conference (WWW), 2016
+   \item[--] Joint Workshop on Interfaces and Human Decision Making for Recommender Systems (IntRS) at the 9th ACM Conference on Recommender Systems, 2015$^\dagger$
+   \item[--] The 11th IEEE International Conference on Automatic Face and Gesture Recognition (FG), 2015
+   \item[--] Data-driven User Behavioral Modelling and Mining from Social Media Workshop (DUBMOD) at ACM Conference of International and Knowledge Management (CIKM), 2014$^\dagger$
+   \item[--] Turkish Journal of Electrical Engineering and Computer Sciences, The Scientific \& Technological Research Council of Turkey, 2014$^\dagger$
+   \item[--] Posters \& Demonstrations --- IEEE Virtual Reality (VR), 2014
+   \item[--] Data-driven User Behavioral Modelling and Mining from Social Media Workshop (DUBMOD) at ACM Conference of International and Knowledge Management (CIKM), 2013$^\dagger$
+   \item[--] ASE/IEEE International Conference on Social Computing, 2013
+   \item[--] Posters \& Demonstrations --- The 18th ACM International Conference on Intelligent User Interfaces (IUI),
+March 19, 2013, Santa Monica, CA, USA
+   \item[--] The 7th Graduate Student Workshop on Computing (GSWC), 2012, UC Santa Barbara$^\dagger$
+\end{innerlist}
+
+% \section{Mentoring}
+% \begin{innerlist}
+% \item 
+% 5 masters student from the departments of Computer Engineering, Media Arts and Technology, Art History, Business and Technological Innovation. These mentorships have resulted in publications, exhibitions, and masters thesis currently in progress.
+% \item
+% 6 undergraduate students from the departments of Computer Engineering, Electrical Engineering, Computer Science, and Visual Design. The mentorship have resulted in publications, exhibitions, and undergraduate thesis.
+% %Nataly Moreno, Media Arts and Technology Masters Student (2014-Current),
+% %Walter Angel, Electrical Engineering Undergraduate Student (2014-Current), 
+% %Daniel Valdez, Art History Masters Student (2014-Current), Carlos Toxtli, Bussiness and Technological Innovation Masters Student (2009-Current), Shloka Desai, Computer Science Undergraduate Student (2013-2014,) Luis Rodriguez, Computer Engineering Undergraduate Student (2013-2014,) Salvador Medina, Computer Engineering Graduate Student (2011-2013), David Alvarez, Computer Engineering Graduate Student (2012-2013.)
+% \end{innerlist}
+
+\section{Skills}
+\begin{innerlist} %\itemsep 1pt % reduce space between items
+   \item[--] \emph{Programming Languages:}~~
+    Python, Scala, JAVA, Javascript (AngularJs), R, C/C++, PHP, MATLAB, HTML5 (Canvas), Processing, ActionScript(FLEX).
+    \item[--] \emph{IDEs:}~~
+    Cursor, Windsurf, PyCharm, IntelliJ, VSCode, Vim
+    \item[--] \emph{Databases and Distributed Systems}~~
+    AWS, Apache Spark, Neo4J, OpenSearch, NoSQL, SQL, Hadoop
+    \item[--] \emph{Specialized Tools and Libraries}~~
+    TensorFlow, D3.js, Node.js, Express.js, p5.js, Flask, Twisted, Weka, NLTK, OpenCV, PBRT, ARToolkit, etc.
+    \item[--] \emph{Platforms}~~
+    Linux, MacOSX, Windows, AIX
+\end{innerlist}
+
+\section{Languages}
+\begin{innerlist}
+\item[--] {English}, {Korean}, {Spanish (intermediate)}\\
+\end{innerlist}
+
+% \newpage
+\section{Extra Curricular Activities}
+\begin{innerlist}
+   \item[--] \emph{Volunteer Club}, Chung-ang University, Seoul, Korea \hfill{2000 - 2009}\\
+   Community service for orphans(0-8 years old children) including education and whole caring since 2000
+   \item[--] \emph{World Disaster Relief Organization}, Korea \hfill{January, 2008 - May, 2012}\\
+   Long-term Supporter and Volunteer
+\end{innerlist}
+
+\section{References}
+
+Tobias H\"{o}llerer\\%, Advisor\\
+Professor, Department of Computer Science\\
+University of California, Santa Barbara\\
+Website:\url{http://www.cs.ucsb.edu/~holl/}\\
+Email:{holl@cs.ucsb.edu}\\
+
+% \newpage
+Matthew Turk\\
+President and Professor of the Toyota Technological Institute at Chicago\\
+Professor Emeritus, University of California, Santa Barbara\\
+Website:\url{https://home.ttic.edu/~mturk/}\\
+Email:{president@ttic.edu}\\
+
+George Legrady\\
+Professor, Media Arts \& Technology Graduate Program (Chair) / Department of Art\\
+University of California, Santa Barbara\\
+Website:\url{http://www.mat.ucsb.edu/~g.legrady/}\\
+Email:{legrady@arts.ucsb.edu}\\
+
+John O'Donovan\\
+Research Fellow, Department of Computer Science\\
+University of California, Santa Barbara\\
+Website:\url{http://cs.ucsb.edu/~jod/}\\
+Email:{jod@cs.ucsb.edu}\\
+
+Hwasup Lim\\
+Senior Research Scientist, Imaging Media Research Center\\
+Korea Institute of Science and Technology (KIST)\\
+Website:\url{http://www.imrc.kist.re.kr/wiki/hslim/}\\
+Email:{hslim@imrc.kist.re.kr}%\\
+
+% \\\\
+% \href{http://penguinkang.com/blog/repo/cv.pdf}{You can find the latest version of this CV here (click).}
+
+%Research - Experience with qualitative and quantitative research, especially User Modeling, Topic Modeling, Pattern Recognition, Natural Language Processing,  Information Retrieval,	Modeling of Sensor Data from Smartphones, Recommender Systems.
+%Technical - Large- scale data driven web architecture, LAMP stack (Linux, Apache, MySQL, Python,) HTML/JavaScript, data manipulation &  analysis (scripting, SQL, R,) Java, C,
+%Project Management-managing technical teams.
+% \halfblankline
+%\end{comment}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%

@@ -1,0 +1,87 @@
+\documentclass[10pt]{article}
+% Times/Nimbus Roman + matching math -- the classic ACL/ACM-style body font.
+% Narrower than default Computer Modern, so it packs more onto the page.
+\usepackage{mathptmx}
+\usepackage[paper=letterpaper,margin=0.45in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*,nosep}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+% ---------- Custom Section Macro ----------
+\newcommand{\ressection}[1]{%
+  \vspace{0.35em}% space before each section
+  \textbf{#1}\\[-0.3em]% section title
+  \rule{\linewidth}{0.3pt}% thin line (optional for readability)
+  \vspace{0.1em}% space after section line
+}
+
+% ---------- HEADER ----------
+\begin{document}
+{\LARGE \textbf{Byungkyu (Jay) Kang}} \hfill \href{mailto:penguinkang@gmail.com}{penguinkang@gmail.com}\\
+Senior Staff AI Scientist (ML/NLP/LLMs) \hfill +1-805-455-9856 \\
+\href{https://penguinkang.github.io/}{homepage} \quad|\quad \href{https://penguinkang.github.io/}{\textbf{CV}} \quad|\quad San Diego, CA \quad|\quad \href{https://scholar.google.com/citations?user=_PXCZLkAAAAJ}{Google Scholar}
+
+\vspace{0.1em}
+
+% ---------- SUMMARY ----------
+\ressection{Summary}
+AI Architect and Principal-level Machine Learning Scientist with 10+ years shipping production ML/NLP systems (large and small language models, recommendation, anomaly detection) for a Fortune-500 financial-software company; models in production serve \textbf{50M+} consumers. Leads cross-functional teams (PM/Eng/Design), mentors scientists and engineers, and owns technical roadmap and reviews end to end. \textbf{16 US patent applications filed (5 granted)} in LLM/NLP; Ph.D. in Computer Science.
+
+% ---------- SKILLS ----------
+\ressection{Core Skills}
+\textbf{ML/AI:} LLM/SLM fine-tuning \& alignment, RAG, RecSys, anomaly detection, XAI, graph/sequence models \\
+\textbf{Data/Platforms:} PyTorch, TensorFlow, scikit-learn, Spark, AWS, Neo4j, OpenSearch, SQL/NoSQL \\
+\textbf{Prod/Infra:} Batch/real-time pipelines, A/B testing, monitoring, AutoML, model eval/guardrails \\
+\textbf{Lang/Tools:} Python, Scala, Java, JS, Docker, Linux/macOS/Windows
+
+% ---------- EXPERIENCE ----------
+\ressection{Experience}
+
+\textbf{Intuit — Intuit AI}, San Diego, CA \hfill \emph{Jun 2018 – Present}\\
+\emph{Senior Staff AI Scientist; Staff (2021-–2025); Senior (2018-–2021)}
+\begin{itemize}
+  \item Led the company's GenAI conversational assistant for customer-support experts (\textbf{Intuit Assist}) and a real-time recommendation model routing customers to the right support channel; earlier built an automatic call/case-note summarizer cutting post-call agent documentation work.
+  \item Led a systematic \textbf{24-wave architecture-search/fine-tuning study} for real-time speech-intent classification: fusing lightweight frozen audio+text encoders -- replacing a costly frontier multimodal LLM entirely -- hits the production target (\textbf{macro F1 0.746}) at \textbf{$\sim$1,000x fewer params} and a fraction of the latency.
+  \item Delivered fine-tuned production models: an SLM replacing a frontier-LLM call in a real-time memory/context-extraction service (\textbf{$\sim$8x lower latency}, 97\%+ reliability), and a conversational-coaching model for live sales/support agents. Also built a model confidence scorer (\textbf{0.80 Pearson / 0.88 AUROC} vs.\ LLM-judge) for quality-gating.
+  \item Own \textbf{production ML infrastructure} across cloud ML platforms (AWS SageMaker, Kubernetes) -- training recipes, distributed RL/eval orchestration; built a paved-path fine-tuning/RL library (auto-sft) with an automated-research-agent feature; fixed a GPU/storage bottleneck blocking 20+ eval configs.
+  \item Shipped a 5-quarter production knowledge-base recommendation feature with measurable handle-time/satisfaction impact; led development of a proprietary RAG-based GenAI agent platform (PSA \& HelpGPT); founding member of the company's first data-science team -- built call-routing classification and a domain embedding model (\textbf{87\%→94\%} query coverage).
+  \item \textbf{16 US patent applications} filed; \textbf{5 granted}. Own on-call/RCA for the GenAI assistant service.
+\end{itemize}
+
+\textbf{Nokia Technologies — CTO Analytics}, Sunnyvale, CA \hfill \emph{Sep 2016 – Mar 2018}\\
+\emph{Data Scientist}
+\begin{itemize}
+  \item Built large-scale analytics for device/content signals using Spark/Scala and ML for recommendation and search ranking.
+\end{itemize}
+
+\textbf{IBM TJ Watson Research (Network Science \& MR)}, Yorktown Heights, NY \hfill \emph{Jun 2016 – Sep 2016}\\
+\emph{Visiting Scholar}
+\begin{itemize}
+  \item Graph mining + reasoning prototypes; interactive visual analytics for model insights.
+\end{itemize}
+
+% ---------- EDUCATION ----------
+\ressection{Education}
+\textbf{Ph.D., Computer Science}, University of California, Santa Barbara \hfill \emph{Mar 2016}\\
+Dissertation: \emph{Information Reliability on the Social Web—-Models and Applications in Intelligent User Interfaces}\\
+\textbf{B.Eng., Electrical \& Electronics Engineering}, Chung-ang University, Seoul, Korea \hfill \emph{Feb 2007}\\
+
+% ---------- SELECTED PATENTS / PUBLICATIONS ----------
+\ressection{Selected Patents (US)}% \small (inventor; assignee Intuit)
+\begin{itemize}
+  \item \textbf{11.907,657} — Dynamically Extracting N-grams for Automated Vocabulary Updates (2024)
+  \item \textbf{11.941,144} — Methods and Systems for Automatic Call Data Generation (2024)
+  \item \textbf{12.067,976} — Automated Search and Presentation Computing System (2024)
+  \item Multiple applications filed: query augmentation, response synthesis, framework-agnostic summarization, context-specific generative answers, anomaly prediction, abandonment behavior, etc.
+\end{itemize}
+
+\ressection{Selected Publications}
+\begin{itemize}
+  \item \textbf{Kang, J.}, ``From Multimodal LLMs to Lightweight Classifiers: When Bypassing the Language Model Improves Speech Intent Detection'' (working paper, 2026).
+  \item Sadeq \emph{et al.}, \href{https://aclanthology.org/2024.findings-emnlp.846/}{``Mitigating Hallucination in Fictional Character Role-Play''} \emph{EMNLP}, 2024.
+  \item Sikdar, \textbf{Kang}, \emph{et al.}, ``Understanding Information Credibility on Twitter'' \emph{ASE/IEEE SocialCom}, 2013 (\textbf{Best Paper}).
+\end{itemize}
+
+\end{document}
