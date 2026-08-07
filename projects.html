@@ -26,7 +26,8 @@
     <h1>Projects</h1>
     <p class="lede">
       Production systems and applied-research projects from my time at Intuit, roughly newest
-      first. Numbers are from internal evaluations and shipped production metrics.
+      first. Numbers are from internal evaluations and shipped production metrics; each entry notes
+      the business impact I contributed to.
     </p>
   </section>
 
@@ -40,7 +41,50 @@
       <p>Led the company's GenAI conversational assistant for customer-support experts and a
       real-time recommendation model that routes customers to the right support channel. Earlier
       in the same product line, built an automatic call/case-note summarizer that cut post-call
-      agent documentation work.</p>
+      agent documentation work. <strong>Impact:</strong> a flagship, company-wide initiative
+      serving live customer-support operations at scale, with measurable reductions in agent
+      documentation and handling time.</p>
+    </div>
+
+    <div class="card">
+      <h3>Behavioral-intelligence platform for support experts</h3>
+      <div class="meta">Applied research · platform, current</div>
+      <span class="tag">Behavioral modeling</span><span class="tag">Sequence prediction</span><span class="tag">Agent skills</span>
+      <p>Help drive a "system of intelligence" that learns a hierarchical behavioral model of how
+      tens of thousands of support experts actually work — mining anonymized activity traces into a
+      taxonomy of actions, tasks, and skills. From ~30M activity events it infers a compact set of
+      canonical tasks, and a next-action prediction model reaches ~98.5% top-5 / ~83% top-1
+      accuracy. That model feeds a factory that turns inferred tasks into executable AI "skills,"
+      plus next-best-task recommendation. <strong>Impact:</strong> collapses weeks of manual
+      build work per skill into an automated pipeline and gives the org its first scalable,
+      quantified view of what a large expert workforce does and how well.</p>
+    </div>
+
+    <div class="card">
+      <h3>Agentic workflow-discovery &amp; skill-generation pipeline</h3>
+      <div class="meta">Platform · production engineering, current</div>
+      <span class="tag">LLM agents</span><span class="tag">Workflow orchestration</span><span class="tag">Task inference</span>
+      <p>Co-build a pair of services that turn raw expert activity data into executable agent skills:
+      a multi-stage task-inference pipeline that clusters user sub-sessions into labeled task
+      categories, and a workflow-orchestration service that composes and validates the resulting
+      skills into a runnable DAG. Designed to run heuristically end-to-end (no LLM calls) as well as
+      LLM-in-the-loop, with checkpoint/resume and per-stage isolation for reproducibility.
+      <strong>Impact:</strong> the paved path for mass-producing production agent skills from
+      real usage instead of hand-authoring each one.</p>
+    </div>
+
+    <div class="card">
+      <h3>Real-time in-conversation AI coaching</h3>
+      <div class="meta">Applied research · production, current</div>
+      <span class="tag">Real-time NLP</span><span class="tag">SLM fine-tuning</span><span class="tag">Conversation intelligence</span>
+      <p>Fine-tuned a compact conversational-coaching model that generates live hints and guidance
+      for sales and support agents mid-conversation, plus behavioral-adherence detection that
+      auto-completes checklists and produces post-interaction summaries — replacing manual
+      quality-sampling and spreadsheet-based review. Part of a broader conversation-intelligence
+      platform consolidating expert guidance, recommendation, coaching, and summarization.
+      <strong>Impact:</strong> pilots showed double-digit lift in agent performance at high
+      behavior-adherence rates and large reductions in the time managers spend reviewing
+      conversations — a core lever for the Serve-to-Sell revenue motion.</p>
     </div>
 
     <div class="card">
@@ -63,7 +107,9 @@
       frontier-LLM call in a real-time memory/context-extraction service (~8x lower latency, 97%+
       reliability), and a conversational-coaching model for live sales/support agents. Also built
       a lightweight model-confidence scorer (0.80 Pearson / 0.88 AUROC vs. an LLM-judge) used to
-      gate output quality without an LLM call on every request.</p>
+      gate output quality without an LLM call on every request. <strong>Impact:</strong> each of
+      these replaces a costly frontier-LLM call in a production path, cutting per-request inference
+      cost and latency while holding or improving quality.</p>
     </div>
 
     <div class="card">
@@ -71,9 +117,12 @@
       <div class="meta">Platform</div>
       <span class="tag">AWS SageMaker</span><span class="tag">Kubernetes</span><span class="tag">RL/eval orchestration</span>
       <p>Own production ML infrastructure across cloud ML platforms — training recipes and
-      distributed RL/eval orchestration. Built a paved-path fine-tuning/RL library (auto-sft) with
+      distributed RL/eval orchestration. Built a paved-path fine-tuning/RL library with
       an automated-research-agent feature for unattended architecture/hyperparameter search, and
-      fixed a GPU/storage bottleneck that had been blocking 20+ eval configurations.</p>
+      fixed a GPU/storage bottleneck that had been blocking 20+ eval configurations.
+      <strong>Impact:</strong> gives scientists a self-serve, reproducible path to fine-tune and
+      evaluate models and unblocked a stalled evaluation pipeline, accelerating the team's shipping
+      cadence.</p>
     </div>
 
     <div class="card">
